@@ -5,6 +5,7 @@ public class TokenConst {
     final public static int EOF = 0;
     final public static int SUBSTITUTE = 1; // =
     final public static int IDENTIFIER = 2; // [a-zA-Z0-9]
+    final public static int INT = 16;
 
     final public static int PLUS = 3;
     final public static int MINUS = 4;
@@ -18,4 +19,9 @@ public class TokenConst {
     final public static int BIGGER_THEN_LEFT_OR_EQUALS = 11; // <=
     final public static int BIGGER_THEN_RIGHT_OR_EQUALS = 12; // >=
 
+    final public static int IF = 13;
+
+    final public static int LABEL = 14;
+
+    final public static int PRINTER = 15;
 }
