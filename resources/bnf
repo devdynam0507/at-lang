@@ -1,0 +1,13 @@
+지원문법:
+- 변수선언 (int만 지원)
+- if
+- print
+
+<identifier> ::= [a-zA-Z0-9]+
+<str_lit> ::= [가-힣a-zA-Z0-9]?
+<str_var> ::= " <str_lit> "
+<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<digit_var> ::= <digit>+
+<expr> ::= <digit> + ('+' | '-' | '/' | '*') + <digit> +
+<decl_var> ::= "int" | "string" <identifier> "=" (<digit_var> | <str_var>) + ;
+<print_expr> ::= "print" + (<str_lit> | <identifier> | <digit_var> | <expr>) + ;

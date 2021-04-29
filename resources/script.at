@@ -1,0 +1,41 @@
+a = 10 // push const 10 , index : 0 [10]
+b = a + 20
+// push const 20 index 1 [10, 20]
+// pop 1
+// pop 0
+// plus [10, 30]
+
+if a != 10 {
+//push v 0
+//push const 10 [10, 30, 10, 10]
+//noteq [10, 30]
+//jump L1
+}
+//LABEL L1
+
+if a != 10 {
+    //push v 0
+    //push const 10
+    //noteq
+    //jpe L1
+
+
+    if b @@ 10 {
+        //push v 1
+        //push const 10
+        //eq
+        //jpn L2
+
+
+    }
+    LABEL L2
+}
+LABEL L1
+
+print b
+//conbuf b
+//fap -> flush and print
+print 10 + 20
+//conbuf 10
+//conbuf 20
+//fap
