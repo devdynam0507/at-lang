@@ -26,7 +26,7 @@ public class AtLang {
         AtLexer.LexerResult lexerResult = lexer.compile().get();
 
         AST ast = new Int64DeclareVariableAST();
-        ast.sort(lexerResult.get(2));
+        ast.sort(lexerResult.get(1));
     }
 
 }
