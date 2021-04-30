@@ -1,10 +1,11 @@
 package kr.atlang;
 
+import kr.atlang.impl.ICompiler;
 import kr.atlang.io.ScriptReader;
 import kr.atlang.lexer.AtLexer;
 import kr.atlang.token.Token;
-import kr.atlang.token.TokenConst;
 import kr.atlang.token.TokenTable;
+import kr.atlang.tokenizer.AtTokenizer;
 
 import java.util.List;
 
@@ -16,8 +17,13 @@ public class AtLang {
         TokenTable tokenTable = new TokenTable();
         tokenTable.initialize();
 
-        AtLexer lexer = new AtLexer(tokenTable, script);
-        List<Token> tokens = lexer.compile().getTokens();
+        ICompiler<List<Token>> tokenizer = new AtTokenizer(tokenTable, script);
+        List<Token> tokens = tokenizer.compile().get();
+
+        AtLexer lexer = new AtLexer(tokenTable, tokens);
+        AtLexer.LexerResult lexerResult = lexer.compile().get();
+
+        System.out.println(lexerResult);
     }
 
 }

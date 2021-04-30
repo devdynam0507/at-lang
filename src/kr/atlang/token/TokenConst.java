@@ -27,6 +27,11 @@ public class TokenConst {
 
     final public static int PRINTER = 15;
 
+    final public static int L_PAREN = 16;
+    final public static int R_PAREN = 17;
+    final public static int L_BRACKET = 18;
+    final public static int R_BRACKET = 19;
+
     final public static String IDENTIFIER_REGEX = "[a-zA-Z]+";
     final public static String DIGIT_REGEX = "[0-9]+";
 }

@@ -25,6 +25,10 @@ public class TokenTable {
         tokenTable.put("@@", TokenConst.EQUALS);
         tokenTable.put("!=", TokenConst.NOT_EQUALS);
         tokenTable.put("print", TokenConst.PRINTER);
+        tokenTable.put("(", TokenConst.L_PAREN);
+        tokenTable.put(")", TokenConst.R_PAREN);
+        tokenTable.put("{", TokenConst.L_BRACKET);
+        tokenTable.put("}", TokenConst.R_BRACKET);
     }
 
     public boolean isToken(String token) {
