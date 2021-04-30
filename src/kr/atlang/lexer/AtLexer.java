@@ -22,6 +22,7 @@ public class AtLexer implements ICompiler<AtLexer.LexerResult> {
     }
 
     public ICompiler<LexerResult> compile() {
+
         for(Token token : tokens) {
             lexerResult.addTokenByLine(token, token.getLine());
         }
@@ -44,6 +45,10 @@ public class AtLexer implements ICompiler<AtLexer.LexerResult> {
             tokenList.add(token);
         }
 
+        public List<Token> get(int line) {
+            return mergedTokens.get(line);
+        }
+
         private void allocList(int line) {
             if(!mergedTokens.containsKey(line)) {
                 mergedTokens.put(line, new ArrayList<>());
@@ -53,7 +58,7 @@ public class AtLexer implements ICompiler<AtLexer.LexerResult> {
         private List<Token> getTokens(int line) {
             allocList(line);
 
-            return mergedTokens.get(line);
+            return get(line);
         }
 
         @Override

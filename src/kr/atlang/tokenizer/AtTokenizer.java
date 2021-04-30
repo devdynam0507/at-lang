@@ -1,7 +1,6 @@
 package kr.atlang.tokenizer;
 
 import kr.atlang.impl.ICompiler;
-import kr.atlang.lexer.AtLexerUtil;
 import kr.atlang.token.Token;
 import kr.atlang.token.TokenConst;
 import kr.atlang.token.TokenTable;
@@ -34,9 +33,9 @@ public class AtTokenizer implements ICompiler<List<Token>> {
         int line = 1;
 
         for(char c : array) {
-            boolean isCarriage = AtLexerUtil.isCarriage(c);
+            boolean isCarriage = AtTokenizerUtil.isCarriage(c);
 
-            if(AtLexerUtil.isBlank(c) || isCarriage) {
+            if(AtTokenizerUtil.isBlank(c) || isCarriage) {
                 String token = sb.toString().trim();
 
                 if(!token.isEmpty()) {

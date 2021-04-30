@@ -1,6 +1,6 @@
-package kr.atlang.lexer;
+package kr.atlang.tokenizer;
 
-public class AtLexerUtil {
+public class AtTokenizerUtil {
 
     public static boolean isCarriage(char c) {
         return (int) c == 10;

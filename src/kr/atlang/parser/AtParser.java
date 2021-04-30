@@ -1,16 +1,17 @@
 package kr.atlang.parser;
 
 import kr.atlang.impl.ICompiler;
+import kr.atlang.lexer.AtLexer;
 import kr.atlang.token.Token;
-
-import java.util.List;
 
 public class AtParser implements ICompiler {
 
-    private List<Token> tokens;
+    private AtLexer.LexerResult lexerResult;
+    private int currentLine;
 
-    public AtParser(List<Token> tokens) {
-        this.tokens = tokens;
+    public AtParser(AtLexer.LexerResult lexerResult) {
+        this.lexerResult = lexerResult;
+        this.currentLine = 1;
     }
 
     @Override

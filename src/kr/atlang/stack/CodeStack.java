@@ -1,4 +1,4 @@
 package kr.atlang.stack;
 
-public class Stack {
+public class CodeStack {
 }

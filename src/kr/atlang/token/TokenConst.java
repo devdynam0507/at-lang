@@ -7,7 +7,7 @@ public class TokenConst {
     final public static int EOF = 0;
     final public static int SUBSTITUTE = 1; // =
     final public static int IDENTIFIER = 2; // [a-zA-Z0-9]
-    final public static int INT = 16;
+    final public static int INT = 20;
 
     final public static int PLUS = 3;
     final public static int MINUS = 4;
