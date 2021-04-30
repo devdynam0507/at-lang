@@ -15,6 +15,8 @@ public abstract class AST {
         ast.push(token);
     }
 
+    public Stack<Token> getAST() { return ast; }
+
     public abstract void sort(List<Token> tokens);
     public abstract boolean isValidSyntax(List<Token> tokens);
 

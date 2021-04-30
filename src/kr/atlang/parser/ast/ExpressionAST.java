@@ -9,18 +9,9 @@ import java.util.Stack;
 
 public class ExpressionAST extends AST {
 
-    private Stack<Token> expression;
-    private List<Token> tokens;
-    private int size;
-
-    public ExpressionAST() {
-        this.expression = new Stack<>();
-    }
-
     @Override
     public void sort(List<Token> tokens) {
-        this.tokens = tokens;
-        this.size = tokens.size();
+        int size = tokens.size();
         Stack<Token> operatorStack = new Stack<>();
 
         for(int i = 0; i < size; i++) {
@@ -28,10 +19,9 @@ public class ExpressionAST extends AST {
             int tokenId = token.getTokenId();
 
             if(tokenId == TokenConst.INT || tokenId == TokenConst.IDENTIFIER) {
-                expression.push(token);
+                addTokenToStack(token);
                 continue;
             } else {
-                System.out.println(token);
                 if(tokenId == TokenConst.L_PAREN || operatorStack.empty()) {
                     operatorStack.push(token);
                     continue;
@@ -40,7 +30,7 @@ public class ExpressionAST extends AST {
                         Token pop = operatorStack.pop();
 
                         if(pop.getTokenId() != TokenConst.L_PAREN) {
-                            expression.push(pop);
+                            addTokenToStack(pop);
                         }
                     }
 
@@ -50,11 +40,6 @@ public class ExpressionAST extends AST {
                     int inStackOperatorPriority = OperatorPriority.getPriority(inStackOperator);
                     int inputOperatorPriority = OperatorPriority.getPriority(token);
 
-                    if(inStackOperator.getTokenId() == TokenConst.L_PAREN) {
-                        operatorStack.push(inStackOperator);
-                        continue;
-                    }
-
                     while(!operatorStack.empty() && inStackOperatorPriority > inputOperatorPriority) {
                         Token pop = operatorStack.pop();
                         inStackOperatorPriority = OperatorPriority.getPriority(pop);
@@ -63,7 +48,7 @@ public class ExpressionAST extends AST {
                             break;
                         }
 
-                        expression.push(pop);
+                        addTokenToStack(pop);
                     }
 
                     operatorStack.push(token);
@@ -76,12 +61,12 @@ public class ExpressionAST extends AST {
             int tokenId = pop.getTokenId();
 
             if(tokenId != TokenConst.R_PAREN && tokenId != TokenConst.L_PAREN) {
-                expression.push(pop);
+                addTokenToStack(pop);
             }
         }
-
-        System.out.println(expression);
     }
+
+
 
     @Override
     public boolean isValidSyntax(List<Token> tokens) {

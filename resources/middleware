@@ -1,0 +1,21 @@
+< 스택 머신 제어 명령 >
+push (<identifier> | <digit>) - 스택 머신에 값 푸시
+
+< 연산 명령 >
+_add
+_subtract
+_multiply
+_divide
+_eq
+_neq
+_jump <label>
+_jnz <label> - label 위치로 두값이 0이 아니면 점프
+_jz <label> - label 위치로 두값이 0 이면 점프
+
+< 메모리 접근 명령 >
+alloc <identifier> - 스택머신 top에 있는 값을 identifier 이름으로 할당
+access <identifier> - 레지스터에 있는 identifier 값을 가져옴
+
+< 라벨 >
+label <identifier>
+
