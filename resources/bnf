@@ -12,3 +12,5 @@
 <expr> ::= <digit> + ('+' | '-' | '/' | '*') + <digit> +
 <decl_var> ::= "int" | "string" <identifier> "=" (<digit_var> | <str_var> ) + ;
 <print_expr> ::= "print" + (<str_lit> | <identifier> | <digit_var> | <expr>) + ;
+
+이제 신택스 형식 체크해서 관련 ast 클래스로 파싱하는일만 남았네

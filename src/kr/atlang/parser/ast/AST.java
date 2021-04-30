@@ -5,7 +5,6 @@ import kr.atlang.token.Token;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public abstract class AST {
 
@@ -20,7 +19,6 @@ public abstract class AST {
         ast.add(token);
     }
 
-    //[a, 10, 20, *, 20, 20, *, +, +]
     public List<Token> getAST() { return ast; }
 
     public abstract void sort(List<Token> tokens);

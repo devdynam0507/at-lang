@@ -10,9 +10,10 @@ if a != 10 {
 if a != 10 {
 
     if b @@ 10 {
-
+        print b
+        print c
+        print d
     }
 
+    print 100 + 200
 }
-
-print b
