@@ -2,7 +2,11 @@ package kr.atlang;
 
 import kr.atlang.io.ScriptReader;
 import kr.atlang.lexer.AtLexer;
+import kr.atlang.token.Token;
+import kr.atlang.token.TokenConst;
 import kr.atlang.token.TokenTable;
+
+import java.util.List;
 
 public class AtLang {
 
@@ -13,7 +17,7 @@ public class AtLang {
         tokenTable.initialize();
 
         AtLexer lexer = new AtLexer(tokenTable, script);
-        lexer.lex();
+        List<Token> tokens = lexer.compile().getTokens();
     }
 
 }

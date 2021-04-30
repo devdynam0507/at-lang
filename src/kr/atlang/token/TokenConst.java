@@ -2,6 +2,8 @@ package kr.atlang.token;
 
 public class TokenConst {
 
+    final public static int NOT_KEYWORD = -1;
+
     final public static int EOF = 0;
     final public static int SUBSTITUTE = 1; // =
     final public static int IDENTIFIER = 2; // [a-zA-Z0-9]
@@ -24,4 +26,7 @@ public class TokenConst {
     final public static int LABEL = 14;
 
     final public static int PRINTER = 15;
+
+    final public static String IDENTIFIER_REGEX = "[a-zA-Z]+";
+    final public static String DIGIT_REGEX = "[0-9]+";
 }

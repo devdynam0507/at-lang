@@ -35,10 +35,24 @@ public class TokenTable {
         Integer id = tokenTable.get(token);
 
         if(id == null) {
-            id = -1;
+            id = TokenConst.NOT_KEYWORD;
         }
 
         return id;
+    }
+
+    public int getTokenIdWithRegex(String token) {
+        boolean isIdentifier = token.matches(TokenConst.IDENTIFIER_REGEX);
+        boolean isDigit = token.matches(TokenConst.DIGIT_REGEX);
+        int tokenId = TokenConst.NOT_KEYWORD;
+
+        if(isIdentifier) {
+            tokenId = TokenConst.IDENTIFIER;
+        } else if(isDigit) {
+            tokenId = TokenConst.INT;
+        }
+
+        return tokenId;
     }
 
 }
