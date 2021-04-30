@@ -3,7 +3,10 @@ package kr.atlang;
 import kr.atlang.impl.ICompiler;
 import kr.atlang.io.ScriptReader;
 import kr.atlang.lexer.AtLexer;
+import kr.atlang.parser.Label;
 import kr.atlang.parser.ast.AST;
+import kr.atlang.parser.ast.ConsolePrintAST;
+import kr.atlang.parser.ast.IfAST;
 import kr.atlang.parser.ast.Int64DeclareVariableAST;
 import kr.atlang.token.Token;
 import kr.atlang.token.TokenTable;
@@ -25,8 +28,10 @@ public class AtLang {
         AtLexer lexer = new AtLexer(tokenTable, tokens);
         AtLexer.LexerResult lexerResult = lexer.compile().get();
 
-        AST ast = new Int64DeclareVariableAST();
-        ast.sort(lexerResult.get(1));
+        Label label = new Label();
+
+        ConsolePrintAST ifAST = new ConsolePrintAST();
+        ifAST.sort(lexerResult.get(6));
     }
 
 }

@@ -7,10 +7,12 @@ public class AtParser implements ICompiler {
 
     private AtLexer.LexerResult lexerResult;
     private int currentLine;
+    private int label;
 
     public AtParser(AtLexer.LexerResult lexerResult) {
         this.lexerResult = lexerResult;
         this.currentLine = 1;
+        this.label = 0;
     }
 
     @Override
@@ -22,4 +24,5 @@ public class AtParser implements ICompiler {
     public Object get() {
         return null;
     }
+
 }

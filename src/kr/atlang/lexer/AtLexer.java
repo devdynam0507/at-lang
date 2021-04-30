@@ -2,6 +2,7 @@ package kr.atlang.lexer;
 
 import kr.atlang.impl.ICompiler;
 import kr.atlang.token.Token;
+import kr.atlang.token.TokenConst;
 import kr.atlang.token.TokenTable;
 
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public class AtLexer implements ICompiler<AtLexer.LexerResult> {
     public ICompiler<LexerResult> compile() {
 
         for(Token token : tokens) {
+            if(token.getTokenId() == TokenConst.IF) {
+                continue;
+            }
+
             lexerResult.addTokenByLine(token, token.getLine());
         }
 
