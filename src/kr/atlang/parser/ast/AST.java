@@ -18,10 +18,12 @@ public abstract class AST {
     protected void addTokenToStack(Token token) {
         ast.add(token);
     }
+    protected void addTokensToList(List<Token> tokens) {
+        ast.addAll(tokens);
+    }
 
     public List<Token> getAST() { return ast; }
 
     public abstract void sort(List<Token> tokens);
-    public abstract boolean isValidSyntax(List<Token> tokens);
 
 }

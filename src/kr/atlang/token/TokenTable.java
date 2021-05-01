@@ -35,6 +35,10 @@ public class TokenTable {
         return tokenTable.containsKey(token);
     }
 
+    public static boolean isOperator(int tokenId) {
+        return tokenId >= 7 && tokenId <= 12;
+    }
+
     public int getTokenId(String token) {
         Integer id = tokenTable.get(token);
 

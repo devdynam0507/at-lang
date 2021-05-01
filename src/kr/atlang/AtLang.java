@@ -3,14 +3,17 @@ package kr.atlang;
 import kr.atlang.impl.ICompiler;
 import kr.atlang.io.ScriptReader;
 import kr.atlang.lexer.AtLexer;
+import kr.atlang.parser.AtParser;
 import kr.atlang.parser.Label;
 import kr.atlang.parser.ast.AST;
 import kr.atlang.parser.ast.ConsolePrintAST;
 import kr.atlang.parser.ast.IfAST;
 import kr.atlang.parser.ast.Int64DeclareVariableAST;
+import kr.atlang.parser.ast.syntax.ASTValidation;
 import kr.atlang.token.Token;
 import kr.atlang.token.TokenTable;
 import kr.atlang.tokenizer.AtTokenizer;
+import kr.atlang.vm.MiddleWare;
 
 import java.util.List;
 
@@ -28,10 +31,12 @@ public class AtLang {
         AtLexer lexer = new AtLexer(tokenTable, tokens);
         AtLexer.LexerResult lexerResult = lexer.compile().get();
 
-        Label label = new Label();
+        MiddleWare middleWare = new MiddleWare();
+        ASTValidation validation = new ASTValidation();
+        AtParser parser = new AtParser(lexerResult, validation, middleWare);
+        parser.compile();
 
-        ConsolePrintAST ifAST = new ConsolePrintAST();
-        ifAST.sort(lexerResult.get(6));
+        middleWare.printMiddleware();
     }
 
 }

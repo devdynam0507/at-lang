@@ -40,16 +40,20 @@ public class AtLexer implements ICompiler<AtLexer.LexerResult> {
     public static class LexerResult {
 
         private Map<Integer, List<Token>> mergedTokens;
+        private int line;
 
         public LexerResult() {
             this.mergedTokens = new HashMap<>();
+            this.line = 1;
         }
 
         public void addTokenByLine(Token token, int line) {
             List<Token> tokenList = getTokens(line);
             tokenList.add(token);
+            this.line = line;
         }
 
+        public int getLine() { return line; }
         public List<Token> get(int line) {
             return mergedTokens.get(line);
         }

@@ -66,9 +66,4 @@ public class ExpressionAST extends AST {
         }
     }
 
-    @Override
-    public boolean isValidSyntax(List<Token> tokens) {
-        return false;
-    }
-
 }

@@ -90,4 +90,8 @@ public class MiddleWare {
         return "";
     }
 
+    public void printMiddleware() {
+        vmMiddleWare.forEach(i -> System.out.println(i));
+    }
+
 }

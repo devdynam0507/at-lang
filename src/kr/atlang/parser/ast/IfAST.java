@@ -2,14 +2,15 @@ package kr.atlang.parser.ast;
 
 import kr.atlang.lexer.AtLexer;
 import kr.atlang.parser.Label;
+import kr.atlang.parser.ast.register.ASTRegister;
 import kr.atlang.token.Token;
-import kr.atlang.token.TokenConst;
+import kr.atlang.vm.IMiddleWareConvertor;
 import kr.atlang.vm.MiddleWare;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IfAST extends AST {
+public class IfAST extends AST implements IMiddleWareConvertor {
 
     private Label label;
 
@@ -20,30 +21,30 @@ public class IfAST extends AST {
     @Override
     public void sort(List<Token> tokens) {
         label.newPoint();
-        CmpAST cmpAST = new CmpAST();
+        AST cmpAST = ASTRegister.getASTRegister().getAST("cmp");
         cmpAST.sort(tokens);
 
-        toMiddleWare(cmpAST);
+        addTokensToList(cmpAST.getAST());
+        cmpAST.getAST().clear();
     }
 
-    public void toMiddleWare(CmpAST cmpAST) {
-        List<Token> ast = cmpAST.getAST();
-        List<String> testMiddleWare = new ArrayList<>();
+    @Override
+    public void toMiddleware(MiddleWare middleWare) {
+        List<Token> ast = getAST();
 
         Token oper1 = ast.get(0);
         Token cmp = ast.get(1);
         Token oper2 = ast.get(2);
+        String cmd = MiddleWare.getCmpOperatorToMiddleWare(cmp);
+        final int labelNum = label.dequeue();
 
-        testMiddleWare.add("push " + oper1.getToken());
-        testMiddleWare.add("push " + oper2.getToken());
-        testMiddleWare.add(MiddleWare.getCmpOperatorToMiddleWare(cmp));
-        testMiddleWare.add(MiddleWare.getJumpCmd(MiddleWare.getCmpOperatorToMiddleWare(cmp)) + " " + label.dequeue());
+        middleWare.addMiddle("push " + oper1.getToken());
+        middleWare.addMiddle("push " + oper2.getToken());
+        middleWare.addMiddle(cmd);
+        middleWare.addMiddle(MiddleWare.getJumpCmd(cmd) + " " + labelNum);
+        label.newPoint("label " + labelNum);
 
-        System.out.println(testMiddleWare);
+        getAST().clear();
     }
 
-    @Override
-    public boolean isValidSyntax(List<Token> tokens) {
-        return false;
-    }
 }

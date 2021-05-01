@@ -1,0 +1,55 @@
+push 10
+alloc a
+push a
+push 10
+push 20
+_multiply
+push 20
+push 20
+_multiply
+_add
+_add
+alloc b
+push a
+push b
+push 20
+_multiply
+_add
+alloc c
+push 10
+push 20
+push 30
+_multiply
+_add
+push 40
+push 50
+_divide
+_subtract
+alloc d
+push a
+push 10
+_neq
+_jnz 0
+push a
+conbuf
+label 0
+push a
+push 10
+_neq
+_jnz 1
+push b
+push 10
+_eq
+_jz 2
+push b
+conbuf
+push c
+conbuf
+push d
+conbuf
+label 2
+push 100
+push 200
+_add
+conbuf
+label 1

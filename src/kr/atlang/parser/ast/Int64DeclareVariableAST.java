@@ -2,17 +2,20 @@ package kr.atlang.parser.ast;
 
 import kr.atlang.token.Token;
 import kr.atlang.token.TokenConst;
+import kr.atlang.vm.IMiddleWareConvertor;
 import kr.atlang.vm.MiddleWare;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
-public class Int64DeclareVariableAST extends AST {
+public class Int64DeclareVariableAST extends AST implements IMiddleWareConvertor {
+
+    private String identifier;
 
     @Override
     public void sort(List<Token> tokens) {
         int tokenSize = tokens.size();
+        this.identifier = tokens.get(0).toString();
         List<Token> expressionTokens = new ArrayList<>();
         ExpressionAST expressionAST = new ExpressionAST();
 
@@ -21,31 +24,25 @@ public class Int64DeclareVariableAST extends AST {
         }
 
         expressionAST.sort(expressionTokens);
-        System.out.println(expressionAST.getAST());
-        toMiddleWare(tokens.get(0), expressionAST);
+        addTokensToList(expressionAST.getAST());
     }
 
-    public void toMiddleWare(Token identifier, ExpressionAST expressionAST) {
-        List<Token> ast = expressionAST.getAST();
-        List<String> testMiddleWare = new ArrayList<>();
+    @Override
+    public void toMiddleware(MiddleWare middleWare) {
+        List<Token> ast = getAST();
 
         for(Token t : ast) {
             int id = t.getTokenId();
 
             if(id == TokenConst.INT || id == TokenConst.IDENTIFIER) {
-                testMiddleWare.add("push " + t.getToken());
+                middleWare.addMiddle("push " + t.getToken());
             } else {
-                testMiddleWare.add(MiddleWare.getOperatorToMiddleWare(t));
+                middleWare.addMiddle(MiddleWare.getOperatorToMiddleWare(t));
             }
         }
 
-        testMiddleWare.add("alloc " + identifier.toString());
-        testMiddleWare.forEach(i -> System.out.println(i));
-    }
-
-    @Override
-    public boolean isValidSyntax(List<Token> tokens) {
-        return false;
+        middleWare.addMiddle("alloc " + identifier);
+        getAST().clear();
     }
 
 }

@@ -13,8 +13,4 @@ public class CmpAST extends AST {
         addTokenToStack(tokens.get(2));
     }
 
-    @Override
-    public boolean isValidSyntax(List<Token> tokens) {
-        return false;
-    }
 }
