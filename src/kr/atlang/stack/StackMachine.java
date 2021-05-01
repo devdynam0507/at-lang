@@ -58,10 +58,12 @@ public class StackMachine {
                 case MiddleWare.OPER_DIVIDE:
                     _divide();
                     break;
-                case MiddleWare.CMP_OPER_EQ:
                 case MiddleWare.CMP_OPER_BL:
-                case MiddleWare.CMP_OPER_NEQ:
                 case MiddleWare.CMP_OPER_BLEQ:
+                    _bl();
+                    break;
+                case MiddleWare.CMP_OPER_EQ:
+                case MiddleWare.CMP_OPER_NEQ:
                 case MiddleWare.CMP_OPER_BR:
                 case MiddleWare.CMP_OPER_BREQ:
                     _eq();
@@ -80,10 +82,11 @@ public class StackMachine {
                     break;
                 case MiddleWare.JMP_BR:
                     i = _jbr(splitLine[1], i) - 1;
+
                     break;
                 case MiddleWare.JMP_BREQ:
                     i = _jbreq(splitLine[1], i) - 1;
-                    continue;
+                    break;
                 case MiddleWare.ALLOC:
                     alloc(splitLine[1]);
                     break;
@@ -141,8 +144,6 @@ public class StackMachine {
         long v1 = getValue(machine.pop());
         long v2 = getValue(machine.pop());
 
-        System.out.println("devide " + v1 + " " + v2);
-
         machine.push(String.valueOf((v1 / v2)));
     }
 
@@ -153,6 +154,14 @@ public class StackMachine {
         machine.push(String.valueOf((v1 - v2)));
     }
 
+    // oper1 < oper2
+    private void _bl() {
+        long v1 = getValue(machine.pop());
+        long v2 = getValue(machine.pop());
+
+        machine.push(String.valueOf(v2 - v1));
+    }
+
     // o1 @@ 02
     //o1 - o2 == 0
     private int _jz(String label, int line) {
@@ -161,7 +170,7 @@ public class StackMachine {
         if(v1 != 0) {
             line = labelCache.get(label);
         } else {
-            line += 1;
+            line++;
         }
 
         return line;
@@ -172,6 +181,8 @@ public class StackMachine {
 
         if(v1 == 0) {
             line = labelCache.get(label);
+        } else {
+            line++;
         }
 
         return line;
@@ -182,8 +193,10 @@ public class StackMachine {
     private int _jbl(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 > 0) {
+        if(v1 < 0) {
             line = labelCache.get(label);
+        } else {
+            ++line;
         }
 
         return line;
@@ -191,11 +204,15 @@ public class StackMachine {
 
     //o1 <= o2 2 - 3
     // o1 - o2 <= 0 -> true
+    //2 <= 2
+    //2 <= 3
     private int _jbleq(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 >= 0) {
+        if(v1 != 0 && v1 < 0) {
             line = labelCache.get(label);
+        } else {
+            line ++;
         }
 
         return line;
@@ -206,18 +223,27 @@ public class StackMachine {
     private int _jbr(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 < 0) {
+        //- 30
+        // 30
+        if(v1 != 0 && v1 > 0) {
             line = labelCache.get(label);
+        } else {
+            ++line;
         }
 
         return line;
     }
 
+    // 1 >= 2
+    // 2 >= 2
+    // 3 >= 2
     private int _jbreq(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 <= 0) {
+        if(v1 != 0 && v1 > 0) {
             line = labelCache.get(label);
+        } else {
+            ++line;
         }
 
         return line;

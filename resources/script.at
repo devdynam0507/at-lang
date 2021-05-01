@@ -1,19 +1,26 @@
-a = 10
-b = a
-c = 10 * 5 / b
-d = a * b * c
+Var = 10
+PlusVar = 5
+VarTwo = 20
 
-if a != 10 {
-    print a
-}
+print PlusVar
+print Var
 
-if a @@ 10 {
+if PlusVar <= VarTwo {
+    print 1
+    NewVar = 100
 
-    if b @@ 10 {
-        print c
+    if VarTwo < NewVar {
+        print 2
     }
-
-    print 100 + 200
 }
 
-print a
+Nam = 22
+Father = 52
+
+if Nam > Father {
+    print 102030
+}
+
+if Father >= Nam {
+    print 20 + 30 + 40
+}

@@ -4,12 +4,19 @@ import java.io.*;
 
 public class ScriptReader {
 
-    private static final String TEST_RESOURCE_PATH = System.getProperty("user.dir") + "/resources/script.at";
+    private static final String PATH_ = System.getProperty("user.dir") + "/{file_name}";
+    private static final String TEST_PATH_ = System.getProperty("user.dir") + "/resources/script.at";
 
     private File resource;
 
-    public ScriptReader() {
-        this.resource = new File(TEST_RESOURCE_PATH);
+    public ScriptReader(String fileName, boolean isTest) {
+        if(isTest) {
+            this.resource = new File(TEST_PATH_);
+            System.out.println(resource);
+        } else {
+            this.resource = new File(PATH_.replace("{file_name}", fileName));
+
+        }
     }
 
     public String getSourceCodes() {
