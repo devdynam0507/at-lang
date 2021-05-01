@@ -57,8 +57,6 @@ public class AtLang {
         VirtualMemoryRegister register = new VirtualMemoryRegister(virtualMemory);
         ConsoleBuf console = new ConsoleBuf();
 
-        middleWare.printMiddleware();
-
         long start = System.currentTimeMillis();
         StackMachine main = new StackMachine(register, middleWare, tokenTable, console);
         int exit = main.begin();
