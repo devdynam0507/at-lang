@@ -33,5 +33,5 @@ public class TokenConst {
     final public static int R_BRACKET = 19;
 
     final public static String IDENTIFIER_REGEX = "[a-zA-Z]+";
-    final public static String DIGIT_REGEX = "[0-9]+";
+    final public static String DIGIT_REGEX = "^[+-]?\\d*(\\.?\\d*)$";
 }

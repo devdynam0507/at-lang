@@ -151,7 +151,10 @@ public class StackMachine {
         long v1 = getValue(machine.pop());
         long v2 = getValue(machine.pop());
 
+        System.out.println("eq: " + v1 + "-" + v2 + "=" + (v1-v2));
+
         machine.push(String.valueOf((v1 - v2)));
+        System.out.println("eq machine: " + machine);
     }
 
     // oper1 < oper2
@@ -165,9 +168,11 @@ public class StackMachine {
     // o1 @@ 02
     //o1 - o2 == 0
     private int _jz(String label, int line) {
+        System.out.println(machine);
         long v1 = getValue(machine.pop());
+        System.out.println("jz: " + v1);
 
-        if(v1 != 0) {
+        if(v1 != 0 || v1 > 0 || v1 < 0) {
             line = labelCache.get(label);
         } else {
             line++;

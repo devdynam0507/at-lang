@@ -37,7 +37,7 @@ public class AtLang {
     }
 
     public static void main(String... args) {
-        String script = getScript(true, args);
+        String script = getScript(false, args);
 
         TokenTable tokenTable = new TokenTable();
         tokenTable.initialize();
@@ -56,6 +56,8 @@ public class AtLang {
         VirtualMemory virtualMemory = new VirtualMemory(8096);
         VirtualMemoryRegister register = new VirtualMemoryRegister(virtualMemory);
         ConsoleBuf console = new ConsoleBuf();
+
+        middleWare.printMiddleware();
 
         long start = System.currentTimeMillis();
         StackMachine main = new StackMachine(register, middleWare, tokenTable, console);
