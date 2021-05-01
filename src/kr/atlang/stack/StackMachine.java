@@ -193,7 +193,7 @@ public class StackMachine {
     private int _jbl(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 < 0) {
+        if(v1 != 0 && v1 > 0) {
             line = labelCache.get(label);
         } else {
             ++line;
@@ -209,7 +209,7 @@ public class StackMachine {
     private int _jbleq(String label, int line) {
         long v1 = getValue(machine.pop());
 
-        if(v1 != 0 && v1 < 0) {
+        if(v1 != 0 && v1 > 0) {
             line = labelCache.get(label);
         } else {
             line ++;

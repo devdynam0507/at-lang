@@ -21,6 +21,6 @@ if Nam > Father {
     print 102030
 }
 
-if Father >= Nam {
+if Nam <= Father {
     print 20 + 30 + 40
 }
