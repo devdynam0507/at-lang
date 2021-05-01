@@ -151,13 +151,9 @@ public class StackMachine {
         long v1 = getValue(machine.pop());
         long v2 = getValue(machine.pop());
 
-        System.out.println("eq: " + v1 + "-" + v2 + "=" + (v1-v2));
-
         machine.push(String.valueOf((v1 - v2)));
-        System.out.println("eq machine: " + machine);
     }
 
-    // oper1 < oper2
     private void _bl() {
         long v1 = getValue(machine.pop());
         long v2 = getValue(machine.pop());
@@ -165,12 +161,8 @@ public class StackMachine {
         machine.push(String.valueOf(v2 - v1));
     }
 
-    // o1 @@ 02
-    //o1 - o2 == 0
     private int _jz(String label, int line) {
-        System.out.println(machine);
         long v1 = getValue(machine.pop());
-        System.out.println("jz: " + v1);
 
         if(v1 != 0 || v1 > 0 || v1 < 0) {
             line = labelCache.get(label);
@@ -193,8 +185,6 @@ public class StackMachine {
         return line;
     }
 
-    //o1 < o2 2 - 3
-    // o1 - o2 < 0 -> true
     private int _jbl(String label, int line) {
         long v1 = getValue(machine.pop());
 
@@ -207,10 +197,6 @@ public class StackMachine {
         return line;
     }
 
-    //o1 <= o2 2 - 3
-    // o1 - o2 <= 0 -> true
-    //2 <= 2
-    //2 <= 3
     private int _jbleq(String label, int line) {
         long v1 = getValue(machine.pop());
 
@@ -223,8 +209,6 @@ public class StackMachine {
         return line;
     }
 
-    //o1 > o2
-    //o1 - o2 > 0
     private int _jbr(String label, int line) {
         long v1 = getValue(machine.pop());
 
@@ -239,9 +223,6 @@ public class StackMachine {
         return line;
     }
 
-    // 1 >= 2
-    // 2 >= 2
-    // 3 >= 2
     private int _jbreq(String label, int line) {
         long v1 = getValue(machine.pop());
 
@@ -268,10 +249,4 @@ public class StackMachine {
         console.out();
     }
 
-//    public static final String JMP_ZERO = "_jz";
-//    public static final String JMP_NOT_ZERO = "_jnz";
-//    public static final String JMP_BL = "_jbl";
-//    public static final String JMP_BLEQ = "_jbleq";
-//    public static final String JMP_BR = "_jbr";
-//    public static final String JMP_BREQ = "_jbreq";
 }
