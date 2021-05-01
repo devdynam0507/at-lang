@@ -1,19 +1,19 @@
 a = 10
-b = a + ( 10 * 20 + ( 20 * 20 ) )
-c = a + b * 20
-d = 10 + 20 * 30 - 40 / 50
+b = a
+c = 10 * 5 / b
+d = a * b * c
 
 if a != 10 {
     print a
 }
 
-if a != 10 {
+if a @@ 10 {
 
     if b @@ 10 {
-        print b
         print c
-        print d
     }
 
     print 100 + 200
 }
+
+print a

@@ -45,6 +45,7 @@ public class AtParser implements ICompiler {
                 ((IMiddleWareConvertor) ast).toMiddleware(middleWare);
             }
         }
+        middleWare.addMiddle("conflush");
 
         return null;
     }

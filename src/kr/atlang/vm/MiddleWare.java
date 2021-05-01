@@ -4,9 +4,13 @@ import kr.atlang.token.Token;
 import kr.atlang.token.TokenConst;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MiddleWare {
+
+    public static final String PUSH = "push";
 
     public static final String OPER_ADD = "_add";
     public static final String OPER_SUB = "_subtract";
@@ -27,6 +31,10 @@ public class MiddleWare {
     public static final String JMP_BR = "_jbr";
     public static final String JMP_BREQ = "_jbreq";
 
+    public static final String CONBUF = "conbuf";
+    public static final String CONFLUSH = "conflush";
+    public static final String ALLOC = "alloc";
+
     private List<String> vmMiddleWare;
 
     public MiddleWare() {
@@ -36,6 +44,23 @@ public class MiddleWare {
     public void addMiddle(String middleWareSrc) {
         vmMiddleWare.add(middleWareSrc);
     }
+
+    public Map<String, Integer> getLabelPositions() {
+        Map<String, Integer> cache = new HashMap<>();
+        int len = vmMiddleWare.size();
+
+        for(int i = 0; i < len; i++) {
+            String labelSrc = vmMiddleWare.get(i);
+
+            if(labelSrc.contains("label")) {
+                cache.put(labelSrc.split(" ")[1], (i + 1));
+            }
+        }
+
+        return cache;
+    }
+
+    public List<String> getVmMiddleWare() { return vmMiddleWare; }
 
     public static String getOperatorToMiddleWare(Token token) {
         switch (token.getTokenId()) {
