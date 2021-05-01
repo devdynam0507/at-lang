@@ -12,7 +12,7 @@ loop | ❌
 function | ❌
 string | ❌
 
-# 키워드
+# ✂️ 키워드
 Syntax | Description
   --------- | ---------
 if | 조건문 키워드
